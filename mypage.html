@@ -10,6 +10,12 @@
     #friends-btn{height: 50px; width: 100%;}
     .friends-btn-wrap{margin-top: 5px;}
 </style>
+<script>
+    function clickNotice(){
+        //window.open("findFriends.html", "childForm", "width=300, height=220, left=600, top=100");
+        window.open("notice.html", "PopupWin", "width=300,height=400, left=600, top=100");
+    }
+</script>
 </head>
 <body>
     <main class="main">
@@ -18,9 +24,9 @@
         <section class="content-wrap">
             
             <section class="notice-wrap">
-                <img class="notice-img" id="notice-img" src="no_notice.png" onclick="location.href='notice.html'">
-                <span class="notice-count" id="notice-count" onclick="location.href='notice.html'">(0)</span>
-                <span class="notice-text" id="notice-text" onclick="location.href='notice.html'">새로운 알림이 없습니다.</span>
+                <img class="notice-img" id="notice-img" src="no_notice.png" onclick="clickNotice()">
+                <span class="notice-count" id="notice-count" onclick="clickNotice()">(0)</span>
+                <span class="notice-text" id="notice-text" onclick="clickNotice()">새로운 알림이 없습니다.</span>
             </section><br>
             <section class="privacy-btn-wrap">
                 <button type="button" id="privacy-btn" onclick="location.href='privacy.html'">정보 변경</button>
