@@ -1,7 +1,13 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("utf-8");	
+	
+	
+	
+%>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>마이페이지</title>
 <style>
     .content-wrap{position: absolute; left:50%; top:30%; transform: translate(-50%, -50%); text-align:center;}
@@ -29,7 +35,7 @@
                 <span class="notice-text" id="notice-text" onclick="clickNotice()">새로운 알림이 없습니다.</span>
             </section><br>
             <section class="privacy-btn-wrap">
-                <button type="button" id="privacy-btn" onclick="location.href='privacy.html'">정보 변경</button>
+                <button type="button" id="privacy-btn" onclick="location.href='privacy.jsp'">정보 변경</button>
             </section>
             <section class="friends-btn-wrap">
                 <button type="button" id="friends-btn" onclick="location.href='friends.html'">친구 관리</button>
