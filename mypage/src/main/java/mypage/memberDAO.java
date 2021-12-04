@@ -1,0 +1,74 @@
+package mypage;
+
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
+public class memberDAO {
+	public static int modifyPass(String id, String name, String pass) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int rows = 0;
+		
+		try{
+			con = getConnection();
+			
+			
+			String sql="UPDATE test SET name=?, pass=? WHERE id=?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, name);
+			pstmt.setString(2, pass);
+			pstmt.setString(3, id);
+			
+			rows = pstmt.executeUpdate();
+			
+		
+			
+			//stmt.executeUpdate("UPDATE test SET name='" + newName +"', pass='" + newPass + "' WHERE id='" + id + "'");
+			
+			
+			
+			} catch(Exception e){
+				System.out.println("메소드 오류" + e.toString());
+			} finally{
+				if(pstmt!=null)
+					try {
+						pstmt.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				if(con!=null)
+					try {
+						con.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			}
+		
+		return rows;
+	}
+
+
+
+	private static Connection getConnection() {
+		
+		Connection conn = null;
+		try {
+			InitialContext ic = new InitialContext();
+			DataSource ds = (DataSource)ic.lookup("java:comp/env/jdbc/mysql");
+			conn = ds.getConnection();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	
+}
