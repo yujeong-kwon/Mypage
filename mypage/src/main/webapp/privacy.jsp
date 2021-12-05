@@ -103,7 +103,7 @@
 		var string = "<%= login_pass %>";
 		if(oldPass.value != string){
 			alert("비밀번호를 정확히 입력해주세요.");
-			form.old-pass.focus();
+			oldPass.focus();
 			return;
 		}
 		

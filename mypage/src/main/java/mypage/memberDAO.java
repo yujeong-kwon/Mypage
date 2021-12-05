@@ -13,7 +13,7 @@ public class memberDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		int rows = 0;
-		
+		System.out.println(id+ name+ pass);
 		try{
 			con = getConnection();
 			
@@ -26,11 +26,7 @@ public class memberDAO {
 			pstmt.setString(3, id);
 			
 			rows = pstmt.executeUpdate();
-			
-		
-			
-			//stmt.executeUpdate("UPDATE test SET name='" + newName +"', pass='" + newPass + "' WHERE id='" + id + "'");
-			
+			System.out.println(rows);
 			
 			
 			} catch(Exception e){
@@ -40,14 +36,12 @@ public class memberDAO {
 					try {
 						pstmt.close();
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				if(con!=null)
 					try {
 						con.close();
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 			}
@@ -67,7 +61,7 @@ public class memberDAO {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		return null;
+		return conn;
 	}
 
 	
