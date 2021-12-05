@@ -34,6 +34,11 @@
         border-right-width:0;border-top-width:0; border-bottom-width:1;}
     #ID{text-align:left; float: left;}
     .class{text-align: right;}
+    #if{
+    	width:0px;
+    	height:0px;
+    	border:0px;
+    }
 </style>
 <script>
 	window.onload = start;
@@ -58,45 +63,39 @@
 			alert("Error creating request object!");
 	}
 
-	function getResult(){
-		if(state==1){
-			createRequest();
+// 	function getResult(){
+// 		if(state==1){
+// 			createRequest();
 			
-			var id = document.getElementById("ID");
-			var name = document.getElementById("name");
-			var newPass = document.getElementById("new-pass");
+// 			var id = document.getElementById("ID");
+// 			var name = document.getElementById("name");
+// 			var newPass = document.getElementById("new-pass");
 			
-			var url = "change.jsp?id=" + id.innerText + "&name=" + name.value + "&pass=" + newPass.value;
-			alert(url);
-			request.open("GET", url, true);
+// 			var url = "change.jsp?id=" + id.innerText + "&name=" + name.value + "&pass=" + newPass.value;
+// 			alert(url);
+// 			request.open("GET", url, true);
 			
 			
-			request.send(null);
-			alert("변경완료");
-		}
-	}
-	
-	//function change() {
-	//	var oldPass = document.getElementById("old-pass");
-// 		var newPass = document.getElementById("new-pass");
-// 		var confirmPass = document.getElementById("confirm-pass");
-		
-<%-- 		var string = "<%= login_pass %>"; --%>
-// 		if(string == oldPass.value){
-// 			if(newPass.value == confirmPass.value){
-// 				state = 1;
-// 			}else{
-// 				alert("새 비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-// 				newPass.focus();
-// 			}
-// 		}else{
-// 			alert("비밀번호를 정확히 입력해주세요.");
-// 			oldPass.focus();
+// 			request.send(null);
+// 			alert("변경완료");
 // 		}
-		
 // 	}
 	
+	var request = null;
+	function createRequest(){
+		try{
+			request = new XMLHttpRequest();
+		} catch(failed){
+			request = null;
+		}
+		if (request == null)
+			alert("Error creating request object!");
+	}
+	
 	function passCheck(form){
+		
+		createRequest();
+		var name = document.getElementById("name");
 		var oldPass = document.getElementById("old-pass");
 		var newPass = document.getElementById("new-pass");
 		var confirmPass = document.getElementById("confirm-pass");
@@ -112,9 +111,33 @@
 			newPass.focus;
 			return;
 		}
-		form.method="POST";
-		form.action="change.jsp";
-		form.submit();
+		
+		//form.method="POST";
+		//form.action="change.jsp";
+		//form.target = "param";
+			//form.submit();
+		var url = "change.jsp?name=" + name.value + "&newPass=" + newPass.value;
+		request.open("POST",url, true);
+		
+		var qry = "name=" + name.value + "&newPass=" + newPass.value;
+		
+		request.onreadystatechange = updatePage;
+		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		request.send(qry);
+		
+		
+	}
+	
+	function updatePage(){
+		if(request.readyState==4){
+			
+			
+			var responsetext = request.responseText;
+			if(responsetext == 1)
+				alert("변경 완료");
+			
+			
+		}
 	}
 </script>
 <body>

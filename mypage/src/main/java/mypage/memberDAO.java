@@ -26,7 +26,6 @@ public class memberDAO {
 			pstmt.setString(3, id);
 			
 			rows = pstmt.executeUpdate();
-			System.out.println(rows);
 			
 			
 			} catch(Exception e){

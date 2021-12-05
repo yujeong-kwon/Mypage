@@ -6,8 +6,13 @@
 <%
 	String login_id = (String) session.getAttribute("login_id");
 	String newName = request.getParameter("name");
-	String newPass = request.getParameter("new-pass");
+	String newPass = request.getParameter("newPass");
+	System.out.println(newName + newPass);
+	int state = 0;
+	state = memberDAO.modifyPass(login_id, newName, newPass);
 	
-	memberDAO.modifyPass(login_id, newName, newPass);
 	
+	if(state != 0){
+		out.print("1");
+	}
 %>
